@@ -6,11 +6,12 @@
 #include <vector>
 #include <list>
 #include <set>
+#include "MyArray.hpp"
 
 
 int main() {
     std::cout << "Move Semantics Performance" << std::endl;
-    MyVector a(10000000);
+    MyVector a(100000000);
 
     auto start = std::chrono::high_resolution_clock::now();
     MyVector b = a;
@@ -39,6 +40,18 @@ int main() {
     std::cout << container_to_string(v) << std::endl;
     std::cout << container_to_string(l) << std::endl;
     std::cout << container_to_string(s) << std::endl;
+
+
+    std::cout << "Template Class MyArray" << std::endl;
+    MyArray<int, 5> arr1;
+    for (int i = 0; i < arr1.size(); ++i) arr1[i] = i * i;
+    for (int i = 0; i < arr1.size(); ++i) std::cout << arr1[i] << " ";
+    std::cout << std::endl;
+
+    MyArray<std::string, 3> arr2;
+    arr2[0] = "one"; arr2[1] = "two"; arr2[2] = "three";
+    for (int i = 0; i < arr2.size(); ++i) std::cout << arr2[i] << " ";
+    std::cout << std::endl;
 
     return 0;
 }
